@@ -1,0 +1,841 @@
+Folder PATH listing
+Volume serial number is DE70-3CB5
+C:.
++---config
++---middlewares
++---node_modules
+¦   +---.bin
+¦   +---@azure
+¦   ¦   +---abort-controller
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---core-auth
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---core-client
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---core-http-compat
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       +---react-native
+¦   ¦   ¦           +---policies
+¦   ¦   +---core-lro
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       ¦   +---http
+¦   ¦   ¦       ¦   +---legacy
+¦   ¦   ¦       ¦   ¦   +---lroEngine
+¦   ¦   ¦       ¦   +---poller
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       ¦   +---http
+¦   ¦   ¦       ¦   +---legacy
+¦   ¦   ¦       ¦   ¦   +---lroEngine
+¦   ¦   ¦       ¦   +---poller
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       ¦   +---http
+¦   ¦   ¦       ¦   +---legacy
+¦   ¦   ¦       ¦   ¦   +---lroEngine
+¦   ¦   ¦       ¦   +---poller
+¦   ¦   ¦       +---react-native
+¦   ¦   ¦           +---http
+¦   ¦   ¦           +---legacy
+¦   ¦   ¦           ¦   +---lroEngine
+¦   ¦   ¦           +---poller
+¦   ¦   +---core-paging
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---core-rest-pipeline
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       ¦   +---retryStrategies
+¦   ¦   ¦       ¦   +---util
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       ¦   +---retryStrategies
+¦   ¦   ¦       ¦   +---util
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       ¦   +---policies
+¦   ¦   ¦       ¦   +---retryStrategies
+¦   ¦   ¦       ¦   +---util
+¦   ¦   ¦       +---react-native
+¦   ¦   ¦           +---policies
+¦   ¦   ¦           +---retryStrategies
+¦   ¦   ¦           +---util
+¦   ¦   +---core-tracing
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---core-util
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---identity
+¦   ¦   ¦   +---dist
+¦   ¦   ¦   +---dist-esm
+¦   ¦   ¦   ¦   +---src
+¦   ¦   ¦   ¦       +---client
+¦   ¦   ¦   ¦       +---credentials
+¦   ¦   ¦   ¦       ¦   +---managedIdentityCredential
+¦   ¦   ¦   ¦       +---msal
+¦   ¦   ¦   ¦       ¦   +---browserFlows
+¦   ¦   ¦   ¦       ¦   +---nodeFlows
+¦   ¦   ¦   ¦       +---plugins
+¦   ¦   ¦   ¦       +---util
+¦   ¦   ¦   +---types
+¦   ¦   +---keyvault-common
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   +---keyvault-keys
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       ¦   +---cryptography
+¦   ¦   ¦       ¦   +---generated
+¦   ¦   ¦       ¦   ¦   +---models
+¦   ¦   ¦       ¦   +---lro
+¦   ¦   ¦       ¦       +---delete
+¦   ¦   ¦       ¦       +---recover
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       ¦   +---cryptography
+¦   ¦   ¦       ¦   +---generated
+¦   ¦   ¦       ¦   ¦   +---models
+¦   ¦   ¦       ¦   +---lro
+¦   ¦   ¦       ¦       +---delete
+¦   ¦   ¦       ¦       +---recover
+¦   ¦   ¦       +---esm
+¦   ¦   ¦           +---cryptography
+¦   ¦   ¦           +---generated
+¦   ¦   ¦           ¦   +---models
+¦   ¦   ¦           +---lro
+¦   ¦   ¦               +---delete
+¦   ¦   ¦               +---recover
+¦   ¦   +---logger
+¦   ¦   ¦   +---dist
+¦   ¦   ¦       +---browser
+¦   ¦   ¦       +---commonjs
+¦   ¦   ¦       +---esm
+¦   ¦   ¦       +---react-native
+¦   ¦   +---msal-browser
+¦   ¦   ¦   +---dist
+¦   ¦   ¦   ¦   +---app
+¦   ¦   ¦   ¦   +---broker
+¦   ¦   ¦   ¦   ¦   +---nativeBroker
+¦   ¦   ¦   ¦   +---cache
+¦   ¦   ¦   ¦   +---config
+¦   ¦   ¦   ¦   +---controllers
+¦   ¦   ¦   ¦   +---crypto
+¦   ¦   ¦   ¦   +---encode
+¦   ¦   ¦   ¦   +---error
+¦   ¦   ¦   ¦   +---event
+¦   ¦   ¦   ¦   +---interaction_client
+¦   ¦   ¦   ¦   +---interaction_handler
+¦   ¦   ¦   ¦   +---naa
+¦   ¦   ¦   ¦   ¦   +---mapping
+¦   ¦   ¦   ¦   +---navigation
+¦   ¦   ¦   ¦   +---network
+¦   ¦   ¦   ¦   +---operatingcontext
+¦   ¦   ¦   ¦   +---request
+¦   ¦   ¦   ¦   +---response
+¦   ¦   ¦   ¦   +---telemetry
+¦   ¦   ¦   ¦   +---utils
+¦   ¦   ¦   +---lib
+¦   ¦   ¦   ¦   +---types
+¦   ¦   ¦   ¦       +---app
+¦   ¦   ¦   ¦       +---broker
+¦   ¦   ¦   ¦       ¦   +---nativeBroker
+¦   ¦   ¦   ¦       +---cache
+¦   ¦   ¦   ¦       +---config
+¦   ¦   ¦   ¦       +---controllers
+¦   ¦   ¦   ¦       +---crypto
+¦   ¦   ¦   ¦       +---encode
+¦   ¦   ¦   ¦       +---error
+¦   ¦   ¦   ¦       +---event
+¦   ¦   ¦   ¦       +---interaction_client
+¦   ¦   ¦   ¦       +---interaction_handler
+¦   ¦   ¦   ¦       +---naa
+¦   ¦   ¦   ¦       ¦   +---mapping
+¦   ¦   ¦   ¦       +---navigation
+¦   ¦   ¦   ¦       +---network
+¦   ¦   ¦   ¦       +---operatingcontext
+¦   ¦   ¦   ¦       +---request
+¦   ¦   ¦   ¦       +---response
+¦   ¦   ¦   ¦       +---telemetry
+¦   ¦   ¦   ¦       +---utils
+¦   ¦   ¦   +---src
+¦   ¦   ¦       +---app
+¦   ¦   ¦       +---broker
+¦   ¦   ¦       ¦   +---nativeBroker
+¦   ¦   ¦       +---cache
+¦   ¦   ¦       +---config
+¦   ¦   ¦       +---controllers
+¦   ¦   ¦       +---crypto
+¦   ¦   ¦       +---encode
+¦   ¦   ¦       +---error
+¦   ¦   ¦       +---event
+¦   ¦   ¦       +---interaction_client
+¦   ¦   ¦       +---interaction_handler
+¦   ¦   ¦       +---naa
+¦   ¦   ¦       ¦   +---mapping
+¦   ¦   ¦       +---navigation
+¦   ¦   ¦       +---network
+¦   ¦   ¦       +---operatingcontext
+¦   ¦   ¦       +---request
+¦   ¦   ¦       +---response
+¦   ¦   ¦       +---telemetry
+¦   ¦   ¦       +---utils
+¦   ¦   +---msal-common
+¦   ¦   ¦   +---browser
+¦   ¦   ¦   +---dist
+¦   ¦   ¦   ¦   +---account
+¦   ¦   ¦   ¦   +---authority
+¦   ¦   ¦   ¦   +---broker
+¦   ¦   ¦   ¦   ¦   +---nativeBroker
+¦   ¦   ¦   ¦   +---cache
+¦   ¦   ¦   ¦   ¦   +---entities
+¦   ¦   ¦   ¦   ¦   +---interface
+¦   ¦   ¦   ¦   ¦   +---persistence
+¦   ¦   ¦   ¦   ¦   +---utils
+¦   ¦   ¦   ¦   +---client
+¦   ¦   ¦   ¦   +---config
+¦   ¦   ¦   ¦   +---constants
+¦   ¦   ¦   ¦   +---crypto
+¦   ¦   ¦   ¦   +---error
+¦   ¦   ¦   ¦   +---logger
+¦   ¦   ¦   ¦   +---network
+¦   ¦   ¦   ¦   +---request
+¦   ¦   ¦   ¦   +---response
+¦   ¦   ¦   ¦   +---telemetry
+¦   ¦   ¦   ¦   ¦   +---performance
+¦   ¦   ¦   ¦   ¦   +---server
+¦   ¦   ¦   ¦   +---url
+¦   ¦   ¦   ¦   +---utils
+¦   ¦   ¦   +---lib
+¦   ¦   ¦   ¦   +---types
+¦   ¦   ¦   ¦       +---account
+¦   ¦   ¦   ¦       +---authority
+¦   ¦   ¦   ¦       +---broker
+¦   ¦   ¦   ¦       ¦   +---nativeBroker
+¦   ¦   ¦   ¦       +---cache
+¦   ¦   ¦   ¦       ¦   +---entities
+¦   ¦   ¦   ¦       ¦   +---interface
+¦   ¦   ¦   ¦       ¦   +---persistence
+¦   ¦   ¦   ¦       ¦   +---utils
+¦   ¦   ¦   ¦       +---client
+¦   ¦   ¦   ¦       +---config
+¦   ¦   ¦   ¦       +---constants
+¦   ¦   ¦   ¦       +---crypto
+¦   ¦   ¦   ¦       +---error
+¦   ¦   ¦   ¦       +---logger
+¦   ¦   ¦   ¦       +---network
+¦   ¦   ¦   ¦       +---request
+¦   ¦   ¦   ¦       +---response
+¦   ¦   ¦   ¦       +---telemetry
+¦   ¦   ¦   ¦       ¦   +---performance
+¦   ¦   ¦   ¦       ¦   +---server
+¦   ¦   ¦   ¦       +---url
+¦   ¦   ¦   ¦       +---utils
+¦   ¦   ¦   +---node
+¦   ¦   ¦   +---src
+¦   ¦   ¦       +---account
+¦   ¦   ¦       +---authority
+¦   ¦   ¦       +---broker
+¦   ¦   ¦       ¦   +---nativeBroker
+¦   ¦   ¦       +---cache
+¦   ¦   ¦       ¦   +---entities
+¦   ¦   ¦       ¦   +---interface
+¦   ¦   ¦       ¦   +---persistence
+¦   ¦   ¦       ¦   +---utils
+¦   ¦   ¦       +---client
+¦   ¦   ¦       +---config
+¦   ¦   ¦       +---constants
+¦   ¦   ¦       +---crypto
+¦   ¦   ¦       +---error
+¦   ¦   ¦       +---logger
+¦   ¦   ¦       +---network
+¦   ¦   ¦       +---request
+¦   ¦   ¦       +---response
+¦   ¦   ¦       +---telemetry
+¦   ¦   ¦       ¦   +---performance
+¦   ¦   ¦       ¦   +---server
+¦   ¦   ¦       +---url
+¦   ¦   ¦       +---utils
+¦   ¦   +---msal-node
+¦   ¦       +---dist
+¦   ¦       ¦   +---cache
+¦   ¦       ¦   ¦   +---distributed
+¦   ¦       ¦   ¦   +---serializer
+¦   ¦       ¦   +---client
+¦   ¦       ¦   ¦   +---ManagedIdentitySources
+¦   ¦       ¦   +---config
+¦   ¦       ¦   +---crypto
+¦   ¦       ¦   +---error
+¦   ¦       ¦   +---network
+¦   ¦       ¦   +---request
+¦   ¦       ¦   +---response
+¦   ¦       ¦   +---retry
+¦   ¦       ¦   +---utils
+¦   ¦       +---lib
+¦   ¦       ¦   +---types
+¦   ¦       ¦       +---cache
+¦   ¦       ¦       ¦   +---distributed
+¦   ¦       ¦       ¦   +---serializer
+¦   ¦       ¦       +---client
+¦   ¦       ¦       ¦   +---ManagedIdentitySources
+¦   ¦       ¦       +---config
+¦   ¦       ¦       +---crypto
+¦   ¦       ¦       +---error
+¦   ¦       ¦       +---network
+¦   ¦       ¦       +---request
+¦   ¦       ¦       +---response
+¦   ¦       ¦       +---retry
+¦   ¦       ¦       +---utils
+¦   ¦       +---src
+¦   ¦           +---cache
+¦   ¦           ¦   +---distributed
+¦   ¦           ¦   +---serializer
+¦   ¦           +---client
+¦   ¦           ¦   +---ManagedIdentitySources
+¦   ¦           +---config
+¦   ¦           +---crypto
+¦   ¦           +---error
+¦   ¦           +---network
+¦   ¦           +---request
+¦   ¦           +---response
+¦   ¦           +---retry
+¦   ¦           +---utils
+¦   +---@js-joda
+¦   ¦   +---core
+¦   ¦       +---dist
+¦   ¦       +---src
+¦   ¦       ¦   +---chrono
+¦   ¦       ¦   +---format
+¦   ¦       ¦   ¦   +---parser
+¦   ¦       ¦   +---temporal
+¦   ¦       ¦   +---zone
+¦   ¦       +---typings
+¦   +---@mapbox
+¦   ¦   +---node-pre-gyp
+¦   ¦       +---.github
+¦   ¦       ¦   +---workflows
+¦   ¦       +---bin
+¦   ¦       +---lib
+¦   ¦       ¦   +---util
+¦   ¦       ¦       +---nw-pre-gyp
+¦   ¦       +---node_modules
+¦   ¦           +---agent-base
+¦   ¦           ¦   +---dist
+¦   ¦           ¦   ¦   +---src
+¦   ¦           ¦   +---src
+¦   ¦           +---debug
+¦   ¦           ¦   +---src
+¦   ¦           +---https-proxy-agent
+¦   ¦           ¦   +---dist
+¦   ¦           +---ms
+¦   +---@tediousjs
+¦   ¦   +---connection-string
+¦   ¦       +---lib
+¦   ¦           +---builder
+¦   ¦           +---parser
+¦   +---@types
+¦   ¦   +---node
+¦   ¦   ¦   +---assert
+¦   ¦   ¦   +---compatibility
+¦   ¦   ¦   +---dns
+¦   ¦   ¦   +---fs
+¦   ¦   ¦   +---readline
+¦   ¦   ¦   +---stream
+¦   ¦   ¦   +---timers
+¦   ¦   ¦   +---ts5.6
+¦   ¦   +---readable-stream
+¦   ¦       +---node_modules
+¦   ¦           +---safe-buffer
+¦   +---abbrev
+¦   +---abort-controller
+¦   ¦   +---dist
+¦   +---accepts
+¦   +---agent-base
+¦   ¦   +---dist
+¦   +---ansi-regex
+¦   +---append-field
+¦   ¦   +---lib
+¦   ¦   +---test
+¦   +---aproba
+¦   +---are-we-there-yet
+¦   ¦   +---lib
+¦   ¦   +---node_modules
+¦   ¦       +---readable-stream
+¦   ¦           +---lib
+¦   ¦               +---internal
+¦   ¦                   +---streams
+¦   +---array-flatten
+¦   +---asynckit
+¦   ¦   +---lib
+¦   +---axios
+¦   ¦   +---dist
+¦   ¦   ¦   +---browser
+¦   ¦   ¦   +---esm
+¦   ¦   ¦   +---node
+¦   ¦   +---lib
+¦   ¦       +---adapters
+¦   ¦       +---cancel
+¦   ¦       +---core
+¦   ¦       +---defaults
+¦   ¦       +---env
+¦   ¦       ¦   +---classes
+¦   ¦       +---helpers
+¦   ¦       +---platform
+¦   ¦           +---browser
+¦   ¦           ¦   +---classes
+¦   ¦           +---common
+¦   ¦           +---node
+¦   ¦               +---classes
+¦   +---balanced-match
+¦   ¦   +---.github
+¦   +---base64-js
+¦   +---bcrypt
+¦   ¦   +---.github
+¦   ¦   ¦   +---workflows
+¦   ¦   +---examples
+¦   ¦   +---lib
+¦   ¦   ¦   +---binding
+¦   ¦   ¦       +---napi-v3
+¦   ¦   +---src
+¦   ¦   +---test
+¦   +---bl
+¦   ¦   +---.github
+¦   ¦   ¦   +---workflows
+¦   ¦   +---test
+¦   +---body-parser
+¦   ¦   +---lib
+¦   ¦       +---types
+¦   +---brace-expansion
+¦   +---buffer
+¦   +---buffer-equal-constant-time
+¦   +---buffer-from
+¦   +---busboy
+¦   ¦   +---.github
+¦   ¦   ¦   +---workflows
+¦   ¦   +---bench
+¦   ¦   +---lib
+¦   ¦   ¦   +---types
+¦   ¦   +---test
+¦   +---bytes
+¦   +---call-bind
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---call-bind-apply-helpers
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---call-bound
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---chownr
+¦   +---cloudinary
+¦   ¦   +---lib
+¦   ¦   ¦   +---analysis
+¦   ¦   ¦   +---api_client
+¦   ¦   ¦   +---cache
+¦   ¦   ¦   +---provisioning
+¦   ¦   ¦   +---utils
+¦   ¦   ¦   ¦   +---analytics
+¦   ¦   ¦   ¦   +---encoding
+¦   ¦   ¦   ¦   +---parsing
+¦   ¦   ¦   +---v2
+¦   ¦   +---types
+¦   +---color-support
+¦   +---combined-stream
+¦   ¦   +---lib
+¦   +---commander
+¦   ¦   +---lib
+¦   ¦   +---typings
+¦   +---concat-map
+¦   ¦   +---example
+¦   ¦   +---test
+¦   +---concat-stream
+¦   ¦   +---node_modules
+¦   ¦       +---readable-stream
+¦   ¦       ¦   +---doc
+¦   ¦       ¦   ¦   +---wg-meetings
+¦   ¦       ¦   +---lib
+¦   ¦       ¦       +---internal
+¦   ¦       ¦           +---streams
+¦   ¦       +---safe-buffer
+¦   ¦       +---string_decoder
+¦   ¦           +---lib
+¦   +---console-control-strings
+¦   +---content-disposition
+¦   +---content-type
+¦   +---cookie
+¦   +---cookie-parser
+¦   ¦   +---node_modules
+¦   ¦       +---cookie
+¦   +---cookie-signature
+¦   +---core-util-is
+¦   ¦   +---lib
+¦   +---debug
+¦   ¦   +---src
+¦   +---define-data-property
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---define-lazy-prop
+¦   +---delayed-stream
+¦   ¦   +---lib
+¦   +---delegates
+¦   ¦   +---test
+¦   +---depd
+¦   ¦   +---lib
+¦   ¦       +---browser
+¦   +---destroy
+¦   +---detect-libc
+¦   ¦   +---lib
+¦   +---dotenv
+¦   ¦   +---lib
+¦   +---dunder-proto
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---ecdsa-sig-formatter
+¦   ¦   +---src
+¦   +---ee-first
+¦   +---emoji-regex
+¦   ¦   +---es2015
+¦   +---encodeurl
+¦   +---es-define-property
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---es-errors
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---es-object-atoms
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---escape-html
+¦   +---etag
+¦   +---event-target-shim
+¦   ¦   +---dist
+¦   +---events
+¦   ¦   +---.github
+¦   ¦   +---tests
+¦   +---express
+¦   ¦   +---lib
+¦   ¦       +---middleware
+¦   ¦       +---router
+¦   +---express-session
+¦   ¦   +---node_modules
+¦   ¦   ¦   +---cookie
+¦   ¦   ¦   +---cookie-signature
+¦   ¦   +---session
+¦   +---finalhandler
+¦   +---follow-redirects
+¦   +---form-data
+¦   ¦   +---lib
+¦   +---forwarded
+¦   +---fresh
+¦   +---fs-minipass
+¦   ¦   +---node_modules
+¦   ¦       +---minipass
+¦   +---fs.realpath
+¦   +---function-bind
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---gauge
+¦   +---get-intrinsic
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---glob
+¦   +---gopd
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---has-property-descriptors
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---has-symbols
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   ¦       +---shams
+¦   +---has-unicode
+¦   +---hasown
+¦   ¦   +---.github
+¦   +---http-errors
+¦   +---http-proxy-agent
+¦   ¦   +---dist
+¦   ¦   +---node_modules
+¦   ¦       +---debug
+¦   ¦       ¦   +---src
+¦   ¦       +---ms
+¦   +---https-proxy-agent
+¦   ¦   +---dist
+¦   ¦   +---node_modules
+¦   ¦       +---debug
+¦   ¦       ¦   +---src
+¦   ¦       +---ms
+¦   +---iconv-lite
+¦   ¦   +---encodings
+¦   ¦   ¦   +---tables
+¦   ¦   +---lib
+¦   +---ieee754
+¦   +---inflight
+¦   +---inherits
+¦   +---ipaddr.js
+¦   ¦   +---lib
+¦   +---is-docker
+¦   +---is-fullwidth-code-point
+¦   +---is-wsl
+¦   +---isarray
+¦   +---js-md4
+¦   ¦   +---build
+¦   ¦   +---doc
+¦   ¦   ¦   +---fonts
+¦   ¦   ¦   +---scripts
+¦   ¦   ¦   ¦   +---prettify
+¦   ¦   ¦   +---styles
+¦   ¦   +---src
+¦   ¦   +---tests
+¦   +---jsonwebtoken
+¦   ¦   +---lib
+¦   ¦   +---node_modules
+¦   ¦       +---jwa
+¦   ¦       +---jws
+¦   ¦       ¦   +---lib
+¦   ¦       +---ms
+¦   +---jwa
+¦   +---jws
+¦   ¦   +---lib
+¦   +---lodash
+¦   ¦   +---fp
+¦   +---lodash.includes
+¦   +---lodash.isboolean
+¦   +---lodash.isinteger
+¦   +---lodash.isnumber
+¦   +---lodash.isplainobject
+¦   +---lodash.isstring
+¦   +---lodash.once
+¦   +---make-dir
+¦   ¦   +---node_modules
+¦   ¦       +---.bin
+¦   ¦       +---semver
+¦   ¦           +---bin
+¦   +---math-intrinsics
+¦   ¦   +---.github
+¦   ¦   +---constants
+¦   ¦   +---test
+¦   +---media-typer
+¦   +---merge-descriptors
+¦   +---methods
+¦   +---mime
+¦   ¦   +---src
+¦   +---mime-db
+¦   +---mime-types
+¦   +---minimatch
+¦   +---minimist
+¦   ¦   +---.github
+¦   ¦   +---example
+¦   ¦   +---test
+¦   +---minipass
+¦   +---minizlib
+¦   ¦   +---node_modules
+¦   ¦       +---minipass
+¦   +---mkdirp
+¦   ¦   +---bin
+¦   ¦   +---lib
+¦   +---ms
+¦   +---mssql
+¦   ¦   +---bin
+¦   ¦   +---lib
+¦   ¦   ¦   +---base
+¦   ¦   ¦   +---error
+¦   ¦   ¦   +---msnodesqlv8
+¦   ¦   ¦   +---tedious
+¦   ¦   +---node_modules
+¦   ¦       +---debug
+¦   ¦       ¦   +---src
+¦   ¦       +---ms
+¦   +---multer
+¦   ¦   +---lib
+¦   ¦   +---node_modules
+¦   ¦   ¦   +---.bin
+¦   ¦   ¦   +---mkdirp
+¦   ¦   ¦       +---bin
+¦   ¦   +---storage
+¦   +---native-duplexpair
+¦   ¦   +---test
+¦   +---negotiator
+¦   ¦   +---lib
+¦   +---node-addon-api
+¦   ¦   +---tools
+¦   +---node-fetch
+¦   ¦   +---lib
+¦   +---nopt
+¦   ¦   +---bin
+¦   ¦   +---lib
+¦   +---npmlog
+¦   +---object-assign
+¦   +---object-inspect
+¦   ¦   +---.github
+¦   ¦   +---example
+¦   ¦   +---test
+¦   ¦       +---browser
+¦   +---on-finished
+¦   +---on-headers
+¦   +---once
+¦   +---open
+¦   +---parseurl
+¦   +---path-is-absolute
+¦   +---path-to-regexp
+¦   +---process
+¦   +---process-nextick-args
+¦   +---proxy-addr
+¦   +---proxy-from-env
+¦   +---q
+¦   +---qs
+¦   ¦   +---.github
+¦   ¦   +---dist
+¦   ¦   +---lib
+¦   ¦   +---test
+¦   +---random-bytes
+¦   +---range-parser
+¦   +---raw-body
+¦   +---readable-stream
+¦   ¦   +---lib
+¦   ¦       +---internal
+¦   ¦       ¦   +---streams
+¦   ¦       +---ours
+¦   ¦       +---stream
+¦   +---rfdc
+¦   ¦   +---.github
+¦   ¦   ¦   +---workflows
+¦   ¦   +---test
+¦   +---rimraf
+¦   +---safe-buffer
+¦   +---safer-buffer
+¦   +---semver
+¦   ¦   +---bin
+¦   ¦   +---classes
+¦   ¦   +---functions
+¦   ¦   +---internal
+¦   ¦   +---ranges
+¦   +---send
+¦   ¦   +---node_modules
+¦   ¦       +---encodeurl
+¦   ¦       +---ms
+¦   +---serve-static
+¦   +---set-blocking
+¦   +---set-function-length
+¦   ¦   +---.github
+¦   +---setprototypeof
+¦   ¦   +---test
+¦   +---side-channel
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---side-channel-list
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---side-channel-map
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---side-channel-weakmap
+¦   ¦   +---.github
+¦   ¦   +---test
+¦   +---signal-exit
+¦   +---sprintf-js
+¦   ¦   +---dist
+¦   ¦   +---src
+¦   +---statuses
+¦   +---stoppable
+¦   ¦   +---lib
+¦   +---streamsearch
+¦   ¦   +---.github
+¦   ¦   ¦   +---workflows
+¦   ¦   +---lib
+¦   ¦   +---test
+¦   +---string-width
+¦   +---string_decoder
+¦   ¦   +---lib
+¦   +---strip-ansi
+¦   +---tar
+¦   ¦   +---lib
+¦   +---tarn
+¦   ¦   +---dist
+¦   +---tedious
+¦   ¦   +---benchmarks
+¦   ¦   ¦   +---bulk-load
+¦   ¦   ¦   +---connection
+¦   ¦   ¦   +---query
+¦   ¦   ¦   +---request
+¦   ¦   ¦   +---token-parser
+¦   ¦   +---lib
+¦   ¦   ¦   +---always-encrypted
+¦   ¦   ¦   +---data-types
+¦   ¦   ¦   +---errors
+¦   ¦   ¦   +---token
+¦   ¦   ¦   +---tracking-buffer
+¦   ¦   ¦   +---utils
+¦   ¦   +---node_modules
+¦   ¦   ¦   +---iconv-lite
+¦   ¦   ¦       +---.github
+¦   ¦   ¦       +---.idea
+¦   ¦   ¦       ¦   +---codeStyles
+¦   ¦   ¦       ¦   +---inspectionProfiles
+¦   ¦   ¦       +---encodings
+¦   ¦   ¦       ¦   +---tables
+¦   ¦   ¦       +---lib
+¦   ¦   +---types
+¦   +---toidentifier
+¦   +---tr46
+¦   ¦   +---lib
+¦   +---tslib
+¦   ¦   +---modules
+¦   +---type-is
+¦   +---typedarray
+¦   ¦   +---example
+¦   ¦   +---test
+¦   ¦       +---server
+¦   +---uid-safe
+¦   +---undici-types
+¦   +---unpipe
+¦   +---util-deprecate
+¦   +---utils-merge
+¦   +---uuid
+¦   ¦   +---dist
+¦   ¦       +---bin
+¦   ¦       +---esm-browser
+¦   ¦       +---esm-node
+¦   ¦       +---umd
+¦   +---vary
+¦   +---webidl-conversions
+¦   ¦   +---lib
+¦   +---whatwg-url
+¦   ¦   +---lib
+¦   +---wide-align
+¦   +---wrappy
+¦   +---xtend
+¦   +---yallist
++---public
+¦   +---components
+¦   +---styles
+¦   +---views
++---routes
++---server

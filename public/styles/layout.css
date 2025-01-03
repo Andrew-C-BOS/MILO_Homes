@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0F0F0F;
+    color: #3A6DA5;
+    flex-wrap: nowrap;
+	z-index: 10; /* Ensure it stays above other elements */
+    position: sticky; /* Keeps it visible at the top */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+#user-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

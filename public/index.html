@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milo Homes Prototype</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap">
+	<link rel="stylesheet" href="/styles/global.css">
+	<link rel="stylesheet" href="/styles/layout.css">
+	<link rel="stylesheet" href="/styles/buttons.css">
+	<link rel="stylesheet" href="/styles/modals.css">
+	<link rel="stylesheet" href="/styles/tables.css">
+	<link rel="stylesheet" href="/styles/home.css">
+	<link rel="stylesheet" href="/styles/landlord.css">
+	<link rel="stylesheet" href="/styles/Offers.css">
+	<link rel="stylesheet" href="/styles/tenant.css">
+	<link rel="stylesheet" href="/styles/manageProperties.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"
+	/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+
+</head>
+<body>
+	<header>
+		<nav>
+			<h1><b>MILO</b> Homes</h1>
+			<div id="user-controls">
+				<button id="login-btn">Login</button>
+				<div id="user-info" class="hidden">
+					<span id="user-name">Hello, User</span>
+					<button id="logout-btn">Logout</button>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main>	
+	    <div id="content">
+			<!-- This will be dynamically replaced with tenant or landlord view -->
+		</div>
+		
+		<div id="auth-modal" class="hidden">
+			<div class="modal-content">
+				<!-- Close Button -->
+				<span id="close-modal" class="close">&times;</span>
+
+				<!-- Login Form -->
+				<form id="login-form">
+					<h2>Login</h2>
+					<input id="login-username" type="text" placeholder="Username" required />
+					<input id="login-password" type="password" placeholder="Password" required />
+					<button type="submit" id="login-btn">Login</button>
+					<p>
+						Don't have an account? <a href="#" id="switch-to-register">Register</a>
+					</p>
+				</form>
+
+				<!-- Registration Step 1 -->
+				<form id="register-form-step-1" class="hidden">
+					<h2>Register</h2>
+					<input id="register-username" type="text" placeholder="Name" required />
+					<input id="register-email" type="email" placeholder="Email Address" required />
+					<input id="register-password" type="password" placeholder="Password" required />
+					<select id="register-user-type" required>
+						<option value="TENANT">Tenant</option>
+						<option value="LANDLORD">Landlord</option>
+					</select>
+					<button type="button" id="continue-to-step-2" class="hidden">Continue</button>
+					<button type="submit" id="submit-tenant">Submit</button>
+					<p>
+						Already have an account? <a href="#" id="switch-to-login">Login</a>
+					</p>
+				</form>
+
+				<!-- Registration Step 2 (Landlord Only) -->
+				<form id="register-form-step-2" class="hidden">
+					<h2>Landlord Details</h2>
+					<input id="register-phone-number" type="tel" placeholder="Phone Number" required />
+					<button type="button" id="back-to-step-1">Back</button>
+					<button type="submit" id="submit-landlord">Submit</button>
+				</form>
+			</div>
+		</div>
+
+
+
+		<div id="details-modal" class="big-modal hidden">
+			<div class="modal-content">
+			
+
+				<!-- Header -->
+				<div class="modal-header">
+					<h2 id="details-title"></h2>
+					<div id="details-rent" class="modal-subtitle"></div>
+				</div>
+
+				<!-- Image Section -->
+				<div class="image-gallery-container">
+					<div id="featured-image" class="featured-image">
+						<!-- Featured image dynamically injected here -->
+					</div>
+					<div id="scrollable-images" class="scrollable-images"></div>
+				</div>
+
+
+				<!-- Details Section -->
+				<div id="details-section" class="modal-section">
+					<h3>Details</h3>
+					<p id="details-description"></p>
+				</div>
+
+				<!-- Amenities Section -->
+				<div id="amenities-section" class="modal-section">
+					<h3>Amenities</h3>
+					<div id="amenities-grid" class="amenities-grid">
+						<!-- Dynamic amenities icons will be injected here -->
+					</div>
+				</div>
+
+				<!-- Transit Section -->
+				<div id="transit-section" class="modal-section">
+					<h3>Transit to Your Favorites</h3>
+					<div id="transit-details">
+						<!-- Dynamic transit details will be injected here -->
+					</div>
+				</div>
+
+				<!-- Actions -->
+				<div class="modal-actions">
+					<button id="rent-button" class="action-btn">Rent This Unit</button>
+					<button id="contact-landlord-button" class="secondary-btn">Contact Landlord</button>
+				</div>
+			</div>
+		</div>
+
+	
+
+
+	</main>
+    <script type="module" src="./script.js"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
+</body>
+</html>

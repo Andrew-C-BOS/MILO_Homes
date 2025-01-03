@@ -1,0 +1,11 @@
+{
+    "user": "sa",
+    "password": "Password",
+    "server": "localhost",
+    "database": "Milo",
+    "options": {
+        "encrypt": true,
+		"trustServerCertificate": true,
+        "enableArithAbort": true
+    }
+}

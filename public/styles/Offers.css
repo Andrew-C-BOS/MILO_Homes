@@ -1,0 +1,264 @@
+.offers-layout {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.building-unit-search {
+    flex: 1;
+    max-width: 300px;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+
+.building-unit-search h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.building-unit-search input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.building-unit-search ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.building-unit-search li {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.building-unit-search li:hover {
+    background-color: #f5f5f5;
+}
+
+.unit-details-main {
+    flex: 2;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.building-list-offers {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Adjust to your container's max height */
+}
+.building-list-offers {
+    /* Standardized properties */
+    scrollbar-width: thin; /* Reduces the scrollbar width */
+    scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+}
+
+.card-list-offers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.building-unit-list-offers {
+	width: 220px;
+}
+
+/* Individual Card */
+.card-offers-list {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 8px solid transparent; /* Status indicator */
+}
+
+/* Hover Effect */
+.card-offers-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Typography */
+.card-offers-list p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Status Label */
+.status-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #6c757d; /* Default Gray */
+}
+
+/* Status Colors */
+.card-offers-list[data-status="Occupied"] {
+    border-left-color: #28a745; /* Green */
+}
+
+.card-offers-list[data-status="Occupied"] .status-label {
+    background-color: #28a745;
+}
+
+.card-offers-list[data-status="Rented"] {
+    border-left-color: #17a2b8; /* Blue */
+}
+
+.card-offers-list[data-status="Rented"] .status-label {
+    background-color: #17a2b8;
+}
+
+.card-offers-list[data-status="On Offer"] {
+    border-left-color: #ffc107; /* Yellow */
+}
+
+.card-offers-list[data-status="On Offer"] .status-label {
+    background-color: #ffc107;
+}
+
+.card-offers-list[data-status="Available to Offer"] {
+    border-left-color: #dc3545; /* Red */
+}
+
+.card-offers-list[data-status="Available to Offer"] .status-label {
+    background-color: #dc3545;
+}
+
+/* Back Button Container */
+.back-button-container {
+    text-align: center; /* Center the button */
+    margin-top: 20px;
+    padding: 20px 0; /* Add spacing around the button */
+}
+
+/* Back Button Styling */
+.back-button-container .landlord-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-button-container .landlord-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* General Dashboard Layout */
+.offer-details-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+/* General Dashboard Layout */
+.offer-details-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Compact Sections */
+.offer-details-dashboard > div {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Section Titles */
+.offer-details-dashboard h4 {
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1em; /* Smaller font size for compact layout */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+}
+
+/* Pricing Breakdown */
+.pricing-info p, 
+.custom-fees-info p, 
+.incentives-info p {
+    margin: 6px 0;
+    font-size: 0.9em; /* Slightly smaller font for compact display */
+    color: #555;
+}
+
+.pricing-info strong,
+.custom-fees-info strong,
+.incentives-info strong {
+    font-weight: bold;
+    color: #222;
+}
+
+/* Actions Section */
+.actions {
+    grid-column: span 2; /* Full-width section */
+    text-align: center;
+    margin-top: 15px;
+}
+
+.actions button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px; /* Smaller padding for compact buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 0.9em; /* Smaller button text */
+    transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+
+/* Future Metrics Section */
+.future-metrics {
+    grid-column: span 1; /* Full-width section */
+    text-align: center;
+    font-style: italic;
+    color: #999;
+
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .offer-details-dashboard {
+        grid-template-columns: 1fr; /* Stack sections vertically */
+    }
+
+    .actions {
+        margin-top: 10px;
+    }
+}
+
+.offers-section h3{
+	margin-top: 2px;
+}

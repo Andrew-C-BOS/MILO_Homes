@@ -1,0 +1,25 @@
+button {
+    padding: 8px 12px;
+    background-color: #ffffff;
+    color: #3A6DA5;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #FFBC01;
+}
+
+.carousel-btn {
+    background-color: #3A6DA5;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.carousel-btn:hover {
+    background-color: #275487;
+}
