@@ -1,8 +1,9 @@
 {
-    "user": "sa",
-    "password": "Password",
-    "server": "localhost",
-    "database": "Milo",
+    "user": process.env.DB_User,
+    "password": process.env.DB_Password,
+    "server": process.env.DB_Server,
+    "database": process.env.DB_Database,
+	"DB_PORT": parseInt(process.env.DB_Port, 10),
     "options": {
         "encrypt": true,
 		"trustServerCertificate": true,
