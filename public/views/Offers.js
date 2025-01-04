@@ -1,7 +1,7 @@
 import { navigateTo } from "../router.js";
 
 // Offers.js
-
+const API_BASE_URL = window.API_BASE_URL || '';
 // Initialize the offers management page
 export function initOffersPage() {
     renderOffersLayout();
@@ -46,7 +46,7 @@ function renderOffersLayout() {
 // Fetch buildings and display them in the list
 async function fetchBuildings() {
     try {
-        const response = await fetch("/api/buildings");
+        const response = await fetch("${API_BASE_URL}/api/buildings");
         const buildings = await response.json();
 
         const buildingList = document.getElementById("building-list-offers");
@@ -76,7 +76,7 @@ let leasesCache = {}; // To store leases by UnitID
 // Fetch all leases for the landlord and cache them
 async function fetchLeases() {
     try {
-        const response = await fetch("/api/landlord/leases"); // Update the API path as needed
+        const response = await fetch("${API_BASE_URL}/api/landlord/leases"); // Update the API path as needed
         const leases = await response.json();
 
         // Map leases by UnitID
@@ -99,14 +99,14 @@ let offersCache = {}; // To store offers by UnitID for quick lookups
 // Fetch all offers for the landlord and cache them
 async function fetchOffers() {
     try {
-        const response = await fetch("/api/landlord/offers");
+        const response = await fetch("${API_BASE_URL}/api/landlord/offers");
         const offers = await response.json();
 
         // Extract OfferIDs
         const offerIds = offers.map((offer) => offer.OfferID);
 
         // Fetch incentives for the list of OfferIDs
-        const incentiveResponse = await fetch("/api/offers/incentives", {
+        const incentiveResponse = await fetch("${API_BASE_URL}/api/offers/incentives", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ offerIds }),
@@ -143,7 +143,7 @@ async function fetchUnits(buildingID) {
             await fetchOffers();
         }
 
-        const response = await fetch(`/api/buildings/${buildingID}/units`);
+        const response = await fetch(`${API_BASE_URL}/api/buildings/${buildingID}/units`);
         const units = await response.json();
 
         const buildingList = document.getElementById("building-list-offers");
@@ -328,7 +328,7 @@ function renderOfferForm(unitID) {
         const feeWaiverThreshold = parseInt(document.getElementById("fee-waiver-threshold").value);
 
         try {
-            const response = await fetch(`/api/units/${unitID}/offers`, {
+            const response = await fetch(`${API_BASE_URL}/api/units/${unitID}/offers`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -455,7 +455,7 @@ function renderBasicRentSetup(offer) {
         const feeWaiverThreshold = parseInt(document.getElementById('fee-waiver-threshold').value);
 
         try {
-            const response = await fetch(`/api/offers/${offer.OfferID}`, {
+            const response = await fetch(`${API_BASE_URL}/api/offers/${offer.OfferID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ RentAmount: rentAmount, ApplicationFee: applicationFee, FeeWaiverThreshold: feeWaiverThreshold }),
@@ -548,7 +548,7 @@ function renderTenantIncentivesSetup(offer) {
 
 
 async function saveOffer(unitID, existingOffer) {
-    const endpoint = existingOffer ? `/api/offers/${existingOffer.OfferID}` : `/api/units/${unitID}/offers`;
+    const endpoint = existingOffer ? `${API_BASE_URL}/api/offers/${existingOffer.OfferID}` : `${API_BASE_URL}/api/units/${unitID}/offers`;
 
     try {
         const response = await fetch(endpoint, {
@@ -596,7 +596,7 @@ async function saveOffer(unitID, existingOffer) {
 
 async function deactivateOffer(offerID) {
     try {
-        const response = await fetch(`/api/offers/${offerID}/deactivate`, {
+        const response = await fetch(`${API_BASE_URL}/api/offers/${offerID}/deactivate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         });

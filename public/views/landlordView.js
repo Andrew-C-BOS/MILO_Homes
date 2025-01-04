@@ -1,5 +1,7 @@
 import { navigateTo } from "../router.js";
 
+const API_BASE_URL = window.API_BASE_URL || '';
+
 export function renderLandlordDashboard() {
     const content = document.getElementById("content");
     content.innerHTML = `
@@ -51,7 +53,7 @@ export function renderLandlordDashboard() {
 
 async function fetchMetrics() {
     try {
-        const response = await fetch("/api/landlord/dashboard", {
+        const response = await fetch("${API_BASE_URL}/api/landlord/dashboard", {
             method: "GET",
             credentials: "include",
         });
@@ -121,7 +123,7 @@ function renderNewListingForm() {
         const searchParams = new URLSearchParams(formData);
 
         try {
-            const response = await fetch(`/api/buildings/search?${searchParams.toString()}`);
+            const response = await fetch(`${API_BASE_URL}/api/buildings/search?${searchParams.toString()}`);
             const resultDiv = document.getElementById('search-results');
             resultDiv.innerHTML = ''; // Clear previous results
 
@@ -241,7 +243,7 @@ async function previewBuildingLocation(formData) {
     zipCode = zipCode.match(/^\d{5}/)?.[0] || ''; // Use only the first 5 digits
 
     try {
-        const response = await fetch(`/api/geocode`, {
+        const response = await fetch(`${API_BASE_URL}/api/geocode`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ address, city, state, zipCode }),
@@ -322,7 +324,7 @@ async function confirmBuildingCreation(formData) {
             longitude: previewLongitude,
         };
 
-        const response = await fetch('/api/buildings', {
+        const response = await fetch('${API_BASE_URL}/api/buildings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(jsonData),
@@ -383,7 +385,7 @@ function enableManualPinMode() {
 
 async function fetchUnits(buildingID) {
     try {
-        const response = await fetch(`/api/buildings/${buildingID}/units`);
+        const response = await fetch(`${API_BASE_URL}/api/buildings/${buildingID}/units`);
         if (response.ok) {
             const units = await response.json();
             renderUnits(units, buildingID);
@@ -465,7 +467,7 @@ function renderAddUnitForm(buildingID) {
         const formData = new FormData(e.target);
 
         try {
-            const response = await fetch(`/api/buildings/${buildingID}/units`, {
+            const response = await fetch(`${API_BASE_URL}/api/buildings/${buildingID}/units`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -513,7 +515,7 @@ function renderAddOfferForm(unitID) {
         const formData = new FormData(e.target);
 
         try {
-            const response = await fetch(`/api/units/${unitID}/offers`, {
+            const response = await fetch(`${API_BASE_URL}/api/units/${unitID}/offers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -619,7 +621,7 @@ async function updateOffer(offerID) {
     const availability = confirm("Mark as available?");
 
     try {
-        const response = await fetch(`/api/offers/${offerID}`, {
+        const response = await fetch(`${API_BASE_URL}/api/offers/${offerID}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ rentAmount: newRent, availabilityStatus: availability ? 1 : 0 }),
@@ -641,7 +643,7 @@ async function approveLease(unitID) {
     const leaseID = prompt("Enter the Lease ID to approve:");
 
     try {
-        const response = await fetch("/api/leases/approve", {
+        const response = await fetch("${API_BASE_URL}/api/leases/approve", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ leaseID }),

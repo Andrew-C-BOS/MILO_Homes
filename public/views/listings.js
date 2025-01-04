@@ -1,5 +1,7 @@
 import { navigateTo } from "../router.js";
 
+const API_BASE_URL = window.API_BASE_URL || '';
+
 export function renderPage() {
     const content = document.getElementById("content");
 
@@ -41,7 +43,7 @@ export function renderPage() {
 
 // Fetch and populate buildings
 function fetchBuildings() {
-    fetch("/api/buildings")
+    fetch("${API_BASE_URL}/api/buildings")
         .then((response) => response.json())
         .then((buildings) => {
             const buildingList = document.getElementById("building-list");
@@ -109,7 +111,7 @@ async function handleBuildingSearch(event) {
 
     try {
         const encodedQuery = encodeURIComponent(query); // Encode the query to handle special characters
-        const response = await fetch(`/api/buildings/search?q=${encodedQuery}`);
+        const response = await fetch(`${API_BASE_URL}/api/buildings/search?q=${encodedQuery}`);
         if (!response.ok) {
             throw new Error(`Server responded with status ${response.status}`);
         }
@@ -206,7 +208,7 @@ async function handleAddUnit(event, buildingID) {
     console.log("Sending unitData:", unitData); // Add this to debug the payload
 
     try {
-        const response = await fetch(`/api/buildings/${buildingID}/units`, {
+        const response = await fetch(`${API_BASE_URL}/api/buildings/${buildingID}/units`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -321,7 +323,7 @@ function renderMapSelection() {
 
 async function submitBuilding(buildingData) {
     try {
-        const response = await fetch("/api/buildings", {
+        const response = await fetch("${API_BASE_URL}/api/buildings", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -349,7 +351,7 @@ async function handleAddBuilding(event) {
     const buildingData = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch("/api/buildings", {
+        const response = await fetch("${API_BASE_URL}/api/buildings", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -411,7 +413,7 @@ function resetBuildings() {
 
 // Fetch and populate units for a building
 function fetchUnits(buildingID) {
-    fetch(`/api/buildings/${buildingID}/units`)
+    fetch(`${API_BASE_URL}/api/buildings/${buildingID}/units`)
         .then((response) => response.json())
         .then((units) => {
             const unitList = document.getElementById("unit-list");
@@ -476,7 +478,7 @@ function selectBuilding(buildingID) {
 
 // Select a unit and display its details
 function selectUnit(unitID) {
-    fetch(`/api/units/${unitID}`)
+    fetch(`${API_BASE_URL}/api/units/${unitID}`)
         .then((response) => response.json())
         .then((unit) => populateUnitDetails(unit))
         .catch((error) => console.error("Error fetching unit details:", error));
@@ -536,7 +538,7 @@ function populateUnitDetails(unit) {
 
 function renderEditUnitForm(unitID) {
     // Fetch the current unit details from the backend or cache
-    fetch(`/api/units/${unitID}`)
+    fetch(`${API_BASE_URL}/api/units/${unitID}`)
         .then((response) => response.json())
         .then((unit) => {
             const main = document.querySelector(".unit-details-main");
@@ -586,7 +588,7 @@ async function handleSaveUnitDetails(event, unitID) {
     };
 
     try {
-        const response = await fetch(`/api/units/${unitID}`, {
+        const response = await fetch(`${API_BASE_URL}/api/units/${unitID}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -611,7 +613,7 @@ async function handleSaveUnitDetails(event, unitID) {
 async function renderEditImages(unitID) {
     const main = document.querySelector(".unit-details-main");
     try {
-        const response = await fetch(`/api/units/${unitID}/images`);
+        const response = await fetch(`${API_BASE_URL}/api/units/${unitID}/images`);
         const images = await response.json();
 
         main.innerHTML = `
@@ -679,7 +681,7 @@ async function handleImageUpload(unitID) {
     [...files].forEach(file => formData.append("images", file));
 
     try {
-        const response = await fetch(`/api/units/${unitID}/images`, {
+        const response = await fetch(`${API_BASE_URL}/api/units/${unitID}/images`, {
             method: "POST",
             body: formData,
         });
@@ -701,7 +703,7 @@ async function handleImageUpload(unitID) {
 
 async function handleImageDelete(imageID, unitID) {
     try {
-        const response = await fetch(`/api/images/${imageID}`, { method: "DELETE" });
+        const response = await fetch(`${API_BASE_URL}/api/images/${imageID}`, { method: "DELETE" });
         if (response.ok) {
             alert("Image deleted successfully!");
             renderEditImages(unitID);
@@ -717,7 +719,7 @@ async function handleImageDelete(imageID, unitID) {
 
 async function updateImageCaption(imageID, caption) {
     try {
-        const response = await fetch(`/api/images/${imageID}`, {
+        const response = await fetch(`${API_BASE_URL}/api/images/${imageID}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ caption }),

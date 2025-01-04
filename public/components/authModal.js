@@ -11,6 +11,8 @@ export function setupAuthModal() {
     const tenantSubmitButton = document.getElementById("submit-tenant");
 	const landlordSubmitButton = document.getElementById("submit-landlord");
     let registrationData = {};
+	
+	const API_BASE_URL = window.API_BASE_URL || '';
 
     // Open login modal
     document.getElementById("login-btn").addEventListener("click", () => {
@@ -110,7 +112,7 @@ export function setupAuthModal() {
 		}
 
 		try {
-			const response = await fetch("/api/login", {
+			const response = await fetch("${API_BASE_URL}/api/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ username, password }),
@@ -135,7 +137,7 @@ export function setupAuthModal() {
 
 
     async function submitRegistration(data) {
-        const endpoint = data.userType === "LANDLORD" ? "/api/register" : "/api/register";
+        const endpoint = data.userType === "LANDLORD" ? "${API_BASE_URL}/api/register" : "${API_BASE_URL}/api/register";
 
         try {
             const response = await fetch(endpoint, {

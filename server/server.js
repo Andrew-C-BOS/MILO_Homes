@@ -8,12 +8,16 @@ const cookieParser = require("cookie-parser");
 const path = require('path'); // Import the 'path' module
 const apiRoutes = require('../routes/api');
 const testConnectionRoutes = require('../routes/testConnection.js');
+const cors = require('cors');
 
+const backendUrl = process.env.NEXT_PUBLIC_API_URL; // Uses Render in production, localhost in dev
 
 // Middleware to parse JSON requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+const allowedOrigins = ['http://localhost:3000','https://milo-homes.vercel.app/']; // Replace with your Vercel app domain
 
 // Configure session middleware
 app.use(session({
@@ -30,6 +34,11 @@ app.use(session({
 // Middleware to serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true, // Allows cookies to be sent with requests
+}));
+
 app.use((req, res, next) => {
     //console.log('Session:', req.session);
 	console.log(`Incoming request: ${req.method} ${req.url}`);
@@ -40,6 +49,14 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
+
+app.get('/config.js', (req, res) => {
+    const apiUrl = process.env.API_BASE_URL || 'http://localhost:3000';
+
+    res.type('application/javascript');
+    res.send(`window.API_BASE_URL = "${apiUrl}";`);
+});
+
 
 // Routes
 app.use('/test-connection', testConnectionRoutes);

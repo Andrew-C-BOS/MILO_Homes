@@ -2,6 +2,8 @@
 const GRID_SIZE = 0.025;          // Degrees per grid
 const MAX_CACHE_SIZE_MB = 50;      // Max memory for grid data
 const DETAIL_ZOOM_THRESHOLD = 13;  // If map zoom < 13, fetch aggregates
+const API_BASE_URL = window.API_BASE_URL || '';
+
 
 
 // =================== GLOBAL STATE ===================
@@ -217,7 +219,7 @@ async function fetchAndShowAggregates(bounds) {
             west: bounds.getWest(),
         }).toString();
 
-        const response = await fetch(`/api/aggregates?${params}`);
+        const response = await fetch(`${API_BASE_URL}/api/aggregates?${params}`);
         if (!response.ok) throw new Error("Failed to fetch aggregates");
 
         aggregateData = await response.json();
@@ -297,7 +299,7 @@ async function fetchAndCacheGridData(gridIDs, filters) {
 		console.log(payload);
 
         // Fetch data from the server
-        const response = await fetch(`/api/grid-properties`, {
+        const response = await fetch(`${API_BASE_URL}/api/grid-properties`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -402,7 +404,7 @@ async function preloadBuildings(bounds) {
             west: bounds.getWest(),
         }).toString();
 
-        const response = await fetch(`/api/properties?${params}`);
+        const response = await fetch(`${API_BASE_URL}/api/properties?${params}`);
         if (!response.ok) throw new Error("Failed to fetch listings");
 
         const units = await response.json();
@@ -460,19 +462,68 @@ function groupUnitsByBuilding(units) {
 }
 
 // =================== MAP MARKERS & UI ===================
+
+const apartmentIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div class="marker-icon">🏠</div>',
+    iconSize: [32, 32], // Customize size
+    iconAnchor: [16, 32], // Anchor at the bottom center
+});
+
+
+
 function updateMapMarkers(buildings) {
     // Clear existing markers first
     clearMapMarkers();
 
     buildings.forEach((bldg) => {
-        const marker = L.marker([bldg.Latitude, bldg.Longitude])
-            .bindPopup(`
-                <strong>${bldg.Address}</strong><br>
-                ${bldg.units.length} matching unit(s) available
-            `)
-            .addTo(map);
+        const marker = L.marker([bldg.Latitude, bldg.Longitude], {
+            icon: apartmentIcon,
+        }).addTo(map);
+
+        // Add custom popup logic
+        marker.on('click', () => {
+            createCustomPopup(marker, {
+                title: bldg.Address,
+                details: `${bldg.units.length} matching unit(s) available`,
+            });
+        });
     });
 }
+
+function createCustomPopup(marker, content) {
+    // Remove existing popups
+    document.querySelectorAll('.custom-popup').forEach((popup) => popup.remove());
+
+    // Create a new popup
+    const popupDiv = document.createElement('div');
+    popupDiv.className = 'custom-popup';
+    popupDiv.innerHTML = `
+        <div class="popup-header">
+            <strong>${content.title}</strong>
+            <button class="popup-close">&times;</button>
+        </div>
+        <div class="popup-body">
+            <p>${content.details}</p>
+            <button class="popup-action">View More</button>
+        </div>
+    `;
+
+    // Append to the map container
+    const mapContainer = document.querySelector('.leaflet-container');
+    mapContainer.appendChild(popupDiv);
+
+    // Position the popup
+    const markerPoint = map.latLngToContainerPoint(marker.getLatLng());
+    popupDiv.style.top = `${markerPoint.y - 60}px`; // Adjust for height
+    popupDiv.style.left = `${markerPoint.x}px`;
+
+    // Close popup on button click or map click
+    const closePopup = () => popupDiv.remove();
+    popupDiv.querySelector('.popup-close').addEventListener('click', closePopup);
+    map.on('click', closePopup);
+}
+
 
 function clearMapMarkers() {
     // Remove only marker layers (not tile layers)
@@ -515,7 +566,7 @@ function updateResultsList(buildings) {
             showDetailsButton.addEventListener("click", async () => {
                 try {
                     // Fetch detailed unit information
-                    const response = await fetch(`/api/units/${unit.UnitID}`);
+                    const response = await fetch(`${API_BASE_URL}/api/units/${unit.UnitID}`);
                     if (!response.ok) throw new Error("Failed to fetch unit details");
                     const unitDetails = await response.json();
 
@@ -590,7 +641,7 @@ async function handleRowClick(event) {
 
     const offerID = row.getAttribute("data-id"); // Get the offer's ID
     try {
-        const response = await fetch(`/api/offers/${offerID}/details`, { method: "GET" });
+        const response = await fetch(`${API_BASE_URL}/api/offers/${offerID}/details`, { method: "GET" });
 
         if (!response.ok) throw new Error("Failed to fetch offer details");
 
@@ -698,7 +749,7 @@ function populateImageGrid(featuredImage, images) {
 
 async function rentUnit(offerID) {
     try {
-        const response = await fetch("/api/leases", {
+        const response = await fetch("${API_BASE_URL}/api/leases", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

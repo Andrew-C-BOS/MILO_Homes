@@ -231,3 +231,82 @@
 .noUi-handle:active {
     border-color: #0056b3;
 }
+
+.marker-icon {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.marker-icon:hover {
+    background-color: #0056b3;
+}
+
+.custom-popup {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    min-width: 200px;
+    z-index: 1000;
+    transform: translate(-50%, -100%); /* Center above the marker */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.popup-close {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.popup-body {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.popup-action {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.popup-action:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -90%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -100%);
+    }
+}
