@@ -34,9 +34,17 @@ app.use(session({
 // Middleware to serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// Apply CORS middleware
 app.use(cors({
-    origin: allowedOrigins,
-    credentials: true, // Allows cookies to be sent with requests
+    origin: function (origin, callback) {
+        // Allow requests with no origin (e.g., mobile apps, Postman) or explicitly allowed origins
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow cookies and headers like Authorization
 }));
 
 app.use((req, res, next) => {
