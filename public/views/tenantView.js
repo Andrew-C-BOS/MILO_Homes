@@ -473,68 +473,73 @@ const apartmentIcon = L.divIcon({
 
 
 function updateMapMarkers(buildings) {
-    // Clear existing markers first
     clearMapMarkers();
 
-    buildings.forEach((bldg) => {
-        const marker = L.marker([bldg.Latitude, bldg.Longitude], {
+    buildings.forEach((building) => {
+        const marker = L.marker([building.Latitude, building.Longitude], {
             icon: apartmentIcon,
         }).addTo(map);
 
-        // Add custom popup logic
         marker.on('click', () => {
-            createCustomPopup(marker, {
-                title: bldg.Address,
-                details: `${bldg.units.length} matching unit(s) available`,
-            });
+            const unitList = buildings.filter(
+                (b) => b.BuildingID === building.BuildingID
+            );
+
+            createCustomPopup(marker, unitList, 0); // Start with the first unit
         });
     });
 }
 
-function createCustomPopup(marker, content) {
-    // Remove existing popups
-    document.querySelectorAll('.custom-popup').forEach((popup) => popup.remove());
+function createCustomPopup(marker, units, unitIndex) {
+    const unit = units[unitIndex];
 
-    // Create a new popup
     const popupDiv = document.createElement('div');
     popupDiv.className = 'custom-popup';
     popupDiv.innerHTML = `
         <div class="popup-header">
-            <strong>${content.title}</strong>
+            <strong>${unit.Address}</strong>
             <button class="popup-close">&times;</button>
         </div>
         <div class="popup-body">
-            <p>${content.details}</p>
-            <button class="popup-action">View More</button>
+            <img src="${unit.Image || 'placeholder.jpg'}" alt="Unit Image" class="popup-image" />
+            <p><strong>Rent:</strong> $${unit.Rent}/month</p>
+            <p><strong>Bedrooms:</strong> ${unit.Bedrooms} | <strong>Bathrooms:</strong> ${unit.Bathrooms}</p>
+            <button class="popup-action">View Details</button>
+        </div>
+        <div class="popup-footer">
+            <button class="popup-prev" ${unitIndex === 0 ? 'disabled' : ''}>Previous</button>
+            <span>Unit ${unitIndex + 1} of ${units.length}</span>
+            <button class="popup-next" ${
+                unitIndex === units.length - 1 ? 'disabled' : ''
+            }>Next</button>
         </div>
     `;
 
-    // Append to the map container
+    // Append and position popup
     const mapContainer = document.querySelector('.leaflet-container');
     mapContainer.appendChild(popupDiv);
-
-    // Position the popup
     const markerPoint = map.latLngToContainerPoint(marker.getLatLng());
-    popupDiv.style.top = `${markerPoint.y - 60}px`; // Adjust for height
+    popupDiv.style.top = `${markerPoint.y - 60}px`;
     popupDiv.style.left = `${markerPoint.x}px`;
 
-    // Function to close the popup
-    const closePopup = () => {
+    // Add event listeners for navigation and closing
+    popupDiv.querySelector('.popup-close').addEventListener('click', () => popupDiv.remove());
+    popupDiv.querySelector('.popup-prev').addEventListener('click', () => {
         popupDiv.remove();
-        map.off('click', closePopup);
-        map.off('movestart', closePopup); // Remove listener on map move
-        map.off('zoomstart', closePopup); // Remove listener on map zoom
-    };
-
-    // Close popup on close button click
-    popupDiv.querySelector('.popup-close').addEventListener('click', closePopup);
-
-    // Close popup on map interaction
-    map.on('click', closePopup);
-    map.on('movestart', closePopup); // Close on map pan
-    map.on('zoomstart', closePopup); // Close on map zoom
+        createCustomPopup(marker, units, unitIndex - 1);
+    });
+    popupDiv.querySelector('.popup-next').addEventListener('click', () => {
+        popupDiv.remove();
+        createCustomPopup(marker, units, unitIndex + 1);
+    });
 }
 
+
+async function fetchUnitDetails(unitID) {
+    const response = await fetch(`/api/units/${unitID}/images`);
+    const images = await response.json();
+    return images;
+}
 
 
 function clearMapMarkers() {
