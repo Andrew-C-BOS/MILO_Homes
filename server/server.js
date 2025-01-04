@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/config.js', (req, res) => {
-    const apiUrl = process.env.API_BASE_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
     res.type('application/javascript');
     res.send(`window.API_BASE_URL = "${apiUrl}";`);

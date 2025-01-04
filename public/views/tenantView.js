@@ -4,7 +4,7 @@ const MAX_CACHE_SIZE_MB = 50;      // Max memory for grid data
 const DETAIL_ZOOM_THRESHOLD = 13;  // If map zoom < 13, fetch aggregates
 const API_BASE_URL = window.API_BASE_URL || '';
 
-
+console.log(API_BASE_URL);
 
 // =================== GLOBAL STATE ===================
 let map;
@@ -518,11 +518,23 @@ function createCustomPopup(marker, content) {
     popupDiv.style.top = `${markerPoint.y - 60}px`; // Adjust for height
     popupDiv.style.left = `${markerPoint.x}px`;
 
-    // Close popup on button click or map click
-    const closePopup = () => popupDiv.remove();
+    // Function to close the popup
+    const closePopup = () => {
+        popupDiv.remove();
+        map.off('click', closePopup);
+        map.off('movestart', closePopup); // Remove listener on map move
+        map.off('zoomstart', closePopup); // Remove listener on map zoom
+    };
+
+    // Close popup on close button click
     popupDiv.querySelector('.popup-close').addEventListener('click', closePopup);
+
+    // Close popup on map interaction
     map.on('click', closePopup);
+    map.on('movestart', closePopup); // Close on map pan
+    map.on('zoomstart', closePopup); // Close on map zoom
 }
+
 
 
 function clearMapMarkers() {
