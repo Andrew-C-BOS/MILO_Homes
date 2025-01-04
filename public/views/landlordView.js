@@ -53,7 +53,7 @@ export function renderLandlordDashboard() {
 
 async function fetchMetrics() {
     try {
-        const response = await fetch("${API_BASE_URL}/api/landlord/dashboard", {
+        const response = await fetch(`${API_BASE_URL}/api/landlord/dashboard`, {
             method: "GET",
             credentials: "include",
         });
@@ -324,7 +324,7 @@ async function confirmBuildingCreation(formData) {
             longitude: previewLongitude,
         };
 
-        const response = await fetch('${API_BASE_URL}/api/buildings', {
+        const response = await fetch(`${API_BASE_URL}/api/buildings`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(jsonData),
@@ -568,7 +568,7 @@ function renderManageListings() {
 
 async function fetchListings() {
     try {
-        const response = await fetch("/api/landlord/offers", {
+        const response = await fetch(`${API_BASE_URL}/api/landlord/offers`, {
             method: "GET",
             credentials: "include",
         });
@@ -643,7 +643,7 @@ async function approveLease(unitID) {
     const leaseID = prompt("Enter the Lease ID to approve:");
 
     try {
-        const response = await fetch("${API_BASE_URL}/api/leases/approve", {
+        const response = await fetch(`${API_BASE_URL}/api/leases/approve`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ leaseID }),

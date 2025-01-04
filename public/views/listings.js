@@ -43,7 +43,7 @@ export function renderPage() {
 
 // Fetch and populate buildings
 function fetchBuildings() {
-    fetch("${API_BASE_URL}/api/buildings")
+    fetch(`${API_BASE_URL}/api/buildings`)
         .then((response) => response.json())
         .then((buildings) => {
             const buildingList = document.getElementById("building-list");
@@ -323,7 +323,7 @@ function renderMapSelection() {
 
 async function submitBuilding(buildingData) {
     try {
-        const response = await fetch("${API_BASE_URL}/api/buildings", {
+        const response = await fetch(`${API_BASE_URL}/api/buildings`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -639,6 +639,9 @@ async function renderEditImages(unitID) {
                                 <button class="landlord-btn delete-image-btn" data-id="${img.ImageID}">
                                     Delete
                                 </button>
+                                <button class="landlord-btn set-featured-btn" data-id="${img.ImageID}">
+                                    ${img.FeaturedImage ? "Featured" : "Set as Featured"}
+                                </button>
                             </div>
                         </div>
                     `).join("")}
@@ -655,9 +658,13 @@ async function renderEditImages(unitID) {
             </section>
         `;
 
+        // Event Listeners
         document.querySelector("#upload-images-btn").addEventListener("click", () => handleImageUpload(unitID));
         document.querySelectorAll(".delete-image-btn").forEach(btn =>
             btn.addEventListener("click", e => handleImageDelete(e.target.dataset.id, unitID))
+        );
+        document.querySelectorAll(".set-featured-btn").forEach(btn =>
+            btn.addEventListener("click", e => handleSetFeaturedImage(e.target.dataset.id, unitID))
         );
         document.querySelectorAll(".image-caption-input").forEach(input =>
             input.addEventListener("blur", e => updateImageCaption(e.target.dataset.id, e.target.value))
@@ -668,6 +675,27 @@ async function renderEditImages(unitID) {
         main.innerHTML = `
             <p class="error-message">Failed to load images. Please try again later.</p>
         `;
+    }
+}
+
+async function handleSetFeaturedImage(imageID, unitID) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/images/set-featured`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ imageID }),
+        });
+
+        if (response.ok) {
+            alert("Featured image updated successfully!");
+            renderEditImages(unitID); // Refresh the image list
+        } else {
+            const error = await response.json();
+            alert(`Error setting featured image: ${error.message}`);
+        }
+    } catch (error) {
+        console.error("Error setting featured image:", error);
+        alert("An error occurred. Please try again.");
     }
 }
 

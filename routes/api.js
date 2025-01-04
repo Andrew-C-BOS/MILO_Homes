@@ -1413,6 +1413,30 @@ router.post('/units/:id', authenticateToken, async (req, res) => {
     }
 });
 
+router.post("/images/set-featured", async (req, res) => {
+    const { imageID } = req.body;
+
+    if (!imageID) {
+        return res.status(400).json({ error: "ImageID is required." });
+    }
+
+    try {
+        const pool = await poolPromise;
+
+        // Execute the stored procedure
+        await pool.request()
+            .input("ImageID", sql.Int, imageID)
+            .query(`
+                EXEC [dbo].[SetFeaturedImage] @ImageID = @ImageID;
+            `);
+
+        res.status(200).json({ message: "Featured image set successfully." });
+    } catch (error) {
+        console.error("Error setting featured image:", error);
+        res.status(500).json({ error: "Failed to set featured image." });
+    }
+});
+
 
 router.get("/buildings/search", async (req, res) => {
     	
@@ -1436,8 +1460,6 @@ router.get("/buildings/search", async (req, res) => {
                OR ZipCode LIKE @KeyWord;
         `);
 
-
-console.log(result);
      if (result.recordset.length === 0) {
             return res.status(200).json([]);
         }

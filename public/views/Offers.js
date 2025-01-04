@@ -46,7 +46,7 @@ function renderOffersLayout() {
 // Fetch buildings and display them in the list
 async function fetchBuildings() {
     try {
-        const response = await fetch("${API_BASE_URL}/api/buildings");
+        const response = await fetch(`${API_BASE_URL}/api/buildings`);
         const buildings = await response.json();
 
         const buildingList = document.getElementById("building-list-offers");
@@ -76,7 +76,7 @@ let leasesCache = {}; // To store leases by UnitID
 // Fetch all leases for the landlord and cache them
 async function fetchLeases() {
     try {
-        const response = await fetch("${API_BASE_URL}/api/landlord/leases"); // Update the API path as needed
+        const response = await fetch(`${API_BASE_URL}/api/landlord/leases`); // Update the API path as needed
         const leases = await response.json();
 
         // Map leases by UnitID
@@ -99,14 +99,14 @@ let offersCache = {}; // To store offers by UnitID for quick lookups
 // Fetch all offers for the landlord and cache them
 async function fetchOffers() {
     try {
-        const response = await fetch("${API_BASE_URL}/api/landlord/offers");
+        const response = await fetch(`${API_BASE_URL}/api/landlord/offers`);
         const offers = await response.json();
 
         // Extract OfferIDs
         const offerIds = offers.map((offer) => offer.OfferID);
 
         // Fetch incentives for the list of OfferIDs
-        const incentiveResponse = await fetch("${API_BASE_URL}/api/offers/incentives", {
+        const incentiveResponse = await fetch(`${API_BASE_URL}/api/offers/incentives`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ offerIds }),
