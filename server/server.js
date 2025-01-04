@@ -10,8 +10,8 @@ const apiRoutes = require('../routes/api');
 const testConnectionRoutes = require('../routes/testConnection.js');
 const cors = require('cors');
 
-const backendUrl = process.env.NEXT_PUBLIC_API_URL; // Uses Render in production, localhost in dev
-
+const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+console.log('Backend URL:', backendUrl);
 // Middleware to parse JSON requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -51,8 +51,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/config.js', (req, res) => {
+	let LocalUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+	console.log(LocalUrl);
     res.type('application/javascript');
-    res.send(`window.API_BASE_URL = "${backendUrl}";`);
+    res.send(`window.API_BASE_URL = "${LocalUrl}";`);
 });
 
 

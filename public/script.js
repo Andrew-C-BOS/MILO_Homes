@@ -16,7 +16,7 @@ function setupHeader() {
 
     logoutBtn.addEventListener("click", async () => {
         try {
-            const response = await fetch("${API_BASE_URL}/api/logout", { method: "POST", credentials: "include" });
+            const response = await fetch(`${API_BASE_URL}/api/logout`, { method: "POST", credentials: "include" });
 
             if (response.ok) {
                 alert("Logged out successfully.");
@@ -34,7 +34,7 @@ function setupHeader() {
 // Checks login status and redirects appropriately
 async function checkLoginStatus() {
     try {
-        const response = await fetch("${API_BASE_URL}/api/user-data", {
+        const response = await fetch(`${API_BASE_URL}/api/user-data`, {
             method: "GET",
             credentials: "include",
         });
