@@ -470,69 +470,147 @@ const apartmentIcon = L.divIcon({
     iconAnchor: [16, 32], // Anchor at the bottom center
 });
 
-
+let markerClusterGroup = null; // Declare cluster group globally
+let activePopup = null; // Track the active popup
 
 function updateMapMarkers(buildings) {
-    clearMapMarkers();
+    // Clear existing markers and cluster group
+    if (markerClusterGroup) {
+        map.removeLayer(markerClusterGroup);
+    }
+    markerClusterGroup = L.markerClusterGroup();
 
     buildings.forEach((building) => {
         const marker = L.marker([building.Latitude, building.Longitude], {
             icon: apartmentIcon,
-        }).addTo(map);
+        });
 
         marker.on('click', () => {
-            const unitList = buildings.filter(
-                (b) => b.BuildingID === building.BuildingID
-            );
+            // Close any active popup
+            if (activePopup) {
+                activePopup.remove();
+                activePopup = null;
+            }
 
-            createCustomPopup(marker, unitList, 0); // Start with the first unit
+            // Filter units based on current filters
+            const filters = getCurrentFilters();
+            const filteredUnits = building.units.filter((unit) => {
+                return (
+                    (!filters.priceMin || unit.Rent >= filters.priceMin) &&
+                    (!filters.priceMax || unit.Rent <= filters.priceMax) &&
+                    (!filters.bedrooms || unit.Bedrooms >= filters.bedrooms) &&
+                    (!filters.bathrooms || unit.Bathrooms >= filters.bathrooms)
+                );
+            });
+			console.log(filteredUnits);
+            if (filteredUnits.length > 0) {
+                // Create and track the new popup with filtered units
+                activePopup = createCustomPopup(marker, filteredUnits, 0);
+            }
         });
+
+        markerClusterGroup.addLayer(marker);
     });
+
+    map.addLayer(markerClusterGroup);
 }
+
 
 function createCustomPopup(marker, units, unitIndex) {
     const unit = units[unitIndex];
 
-    const popupDiv = document.createElement('div');
-    popupDiv.className = 'custom-popup';
+    // Create or reuse the popup element
+    let popupDiv = document.querySelector('.custom-popup');
+    if (!popupDiv) {
+        popupDiv = document.createElement('div');
+        popupDiv.className = 'custom-popup';
+
+        // Append popup to the map container once
+        const mapContainer = document.querySelector('.leaflet-container');
+        mapContainer.appendChild(popupDiv);
+
+        // Add close interaction
+        const closePopup = () => {
+            if (popupDiv) {
+                popupDiv.remove();
+                activePopup = null;
+            }
+            map.off('movestart', closePopup);
+            map.off('zoomstart', closePopup);
+        };
+
+        popupDiv.addEventListener('click', (event) => {
+            if (event.target.classList.contains('popup-close')) {
+                closePopup();
+            }
+        });
+
+        map.on('movestart', closePopup);
+        map.on('zoomstart', closePopup);
+    }
+
+    // Update popup content dynamically
     popupDiv.innerHTML = `
         <div class="popup-header">
-            <strong>${unit.Address}</strong>
+            <strong>${unit.Address || 'No Address'}, Unit ${unit.UnitNumber || 'N/A'}</strong>
             <button class="popup-close">&times;</button>
         </div>
         <div class="popup-body">
-            <img src="${unit.Image || 'placeholder.jpg'}" alt="Unit Image" class="popup-image" />
-            <p><strong>Rent:</strong> $${unit.Rent}/month</p>
-            <p><strong>Bedrooms:</strong> ${unit.Bedrooms} | <strong>Bathrooms:</strong> ${unit.Bathrooms}</p>
-            <button class="popup-action">View Details</button>
+            <img src="${unit.ImageURL || 'placeholder.jpg'}" alt="Key Image" class="popup-image" />
+            <div class="popup-details">
+                <p><strong>Rent:</strong> $${unit.Rent || 'N/A'}/month</p>
+                <p><strong>Bedrooms:</strong> ${unit.Bedrooms || 'N/A'}</p>
+                <p><strong>Bathrooms:</strong> ${unit.Bathrooms || 'N/A'}</p>
+            </div>
         </div>
         <div class="popup-footer">
-            <button class="popup-prev" ${unitIndex === 0 ? 'disabled' : ''}>Previous</button>
-            <span>Unit ${unitIndex + 1} of ${units.length}</span>
-            <button class="popup-next" ${
-                unitIndex === units.length - 1 ? 'disabled' : ''
-            }>Next</button>
+            <button class="popup-prev">Previous</button>
+            <button class="popup-action show-details" data-unit-id="${unit.UnitID}">Show Details</button>
+            <button class="popup-next">Next</button>
         </div>
     `;
 
-    // Append and position popup
-    const mapContainer = document.querySelector('.leaflet-container');
-    mapContainer.appendChild(popupDiv);
+    // Position the popup
     const markerPoint = map.latLngToContainerPoint(marker.getLatLng());
-    popupDiv.style.top = `${markerPoint.y - 60}px`;
+    popupDiv.style.top = `${markerPoint.y - 60}px`; // Adjust for height
     popupDiv.style.left = `${markerPoint.x}px`;
 
-    // Add event listeners for navigation and closing
-    popupDiv.querySelector('.popup-close').addEventListener('click', () => popupDiv.remove());
+    // Add navigation event listeners
     popupDiv.querySelector('.popup-prev').addEventListener('click', () => {
-        popupDiv.remove();
-        createCustomPopup(marker, units, unitIndex - 1);
+        const newIndex = (unitIndex - 1 + units.length) % units.length; // Wrap to the last unit if at the start
+		createCustomPopup(marker, units, newIndex);
     });
+
     popupDiv.querySelector('.popup-next').addEventListener('click', () => {
-        popupDiv.remove();
-        createCustomPopup(marker, units, unitIndex + 1);
+        const newIndex = (unitIndex + 1) % units.length; // Wrap to the first unit if at the end
+        createCustomPopup(marker, units, newIndex);
     });
+
+    popupDiv.querySelector('.show-details').addEventListener('click', async (event) => {
+        const unitID = event.target.getAttribute('data-unit-id');
+        await openUnitDetailsModal(unit);
+    });
+
+    // Track the active popup
+    activePopup = popupDiv;
+
+    return popupDiv;
 }
+
+async function openOfferDetailsModal(offerID) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/offers/${offerID}/details`, { method: "GET" });
+
+        if (!response.ok) throw new Error("Failed to fetch offer details");
+
+        const details = await response.json();
+        openDetailsModal(details); // Display details in the modal
+    } catch (error) {
+        console.error("Error fetching offer details:", error);
+        alert("Failed to load offer details. Please try again.");
+    }
+}
+
 
 
 async function fetchUnitDetails(unitID) {
@@ -552,6 +630,7 @@ function clearMapMarkers() {
 }
 
 function updateResultsList(buildings) {
+	console.log(buildings);
     const apartmentList = document.getElementById("apartment-list");
     apartmentList.innerHTML = "";
 
@@ -584,6 +663,8 @@ function updateResultsList(buildings) {
                 try {
                     // Fetch detailed unit information
                     const response = await fetch(`${API_BASE_URL}/api/units/${unit.UnitID}`);
+					console.log(unit);
+					console.log(response);
                     if (!response.ok) throw new Error("Failed to fetch unit details");
                     const unitDetails = await response.json();
 
@@ -671,46 +752,59 @@ async function handleRowClick(event) {
 
 
 
-function openDetailsModal(details) {
-    const modal = document.getElementById("details-modal");
-	console.log(details);
-    // Populate Header
-    document.getElementById("details-title").textContent = details.Address;
-    document.getElementById("details-rent").textContent = `$${details.RentAmount} / month`;
+async function openUnitDetailsModal(unit) {
+	let unitID = unit.UnitID;
+    try {
+        // 1. Fetch the unit details
+        const response = await fetch(`${API_BASE_URL}/api/units/${unitID}`);
+        if (!response.ok) throw new Error("Failed to fetch unit details");
+        const unitDetails = await response.json();
 
-    // Populate Images
-    populateImageGrid(details.FeaturedImage, details.Images);
+        // 2. Grab the modal elements
+        const modal = document.getElementById("details-modal");
+        const modalContent = modal.querySelector(".modal-content");
 
-    // Populate Details
-    document.getElementById("details-description").textContent = `
-        Bedrooms: ${details.Bedrooms}, Bathrooms: ${details.Bathrooms}
-        Lease: ${details.StartDate} - ${details.EndDate || "N/A"}
-        Type: ${details.PropertyType}
-    `;
+        // 3. Populate your modal fields
+        modal.querySelector("#details-title").textContent = unit.Address || "No address"; 
+        modal.querySelector("#details-rent").textContent = `$${unit.Rent || "N/A"} / month`;
+        modal.querySelector("#details-description").textContent =
+            unitDetails.Description || "No description available.";
 
-    // Populate Amenities
-    const amenitiesGrid = document.getElementById("amenities-grid");
-    amenitiesGrid.innerHTML = details.Amenities
-        ? Object.entries(details.Amenities)
-              .filter(([key, value]) => value)
-              .map(([key]) => `<div class="amenity-icon">${key}</div>`)
-              .join("")
-        : "<p>No amenities listed.</p>";
+        // Example: amenities grid
+        const amenitiesGrid = modal.querySelector("#amenities-grid");
+        amenitiesGrid.innerHTML = unitDetails.Amenities
+            ? Object.entries(unitDetails.Amenities)
+                  .filter(([_, value]) => value)
+                  .map(([key]) => `<div class="amenity-icon">${key}</div>`)
+                  .join("")
+            : "<p>No amenities listed.</p>";
 
-    // Populate Transit
-    const transitDetails = document.getElementById("transit-details");
-    transitDetails.innerHTML = details.Transit
-        ? details.Transit.map(
-              loc => `<p><strong>${loc.name}</strong>: Walk: ${loc.walk}, Drive: ${loc.drive}, Transit: ${loc.transit || "N/A"}</p>`
-          ).join("")
-        : "<p>No transit information available.</p>";
+        // Example: transit info
+        const transitDetails = modal.querySelector("#transit-details");
+        transitDetails.innerHTML = unitDetails.Transit
+            ? unitDetails.Transit.map(
+                  (loc) => `<p><strong>${loc.name}</strong>: Walk: ${loc.walk}, Drive: ${loc.drive}</p>`
+              ).join("")
+            : "<p>No transit information available.</p>";
 
-    // Show Modal
-    modal.classList.remove("hidden");
+        // Example: images
+        populateImageGrid(unitDetails.FeaturedImage, unitDetails.Images || []);
 
-    // Close Logic
-    document.getElementById("close-details-modal").onclick = () => modal.classList.add("hidden");
+        // 4. Show the modal
+        modal.classList.remove("hidden");
+
+        // 5. Close the modal on background click or dedicated close button
+        modal.addEventListener("click", (evt) => {
+            if (!modalContent.contains(evt.target)) {
+                modal.classList.add("hidden");
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching unit details:", error);
+        alert("Failed to load details. Please try again.");
+    }
 }
+
 
 
 function populateImageGrid(featuredImage, images) {

@@ -33,7 +33,8 @@ router.get("/properties", async (req, res) => {
         const query = `
             SELECT 
                 u.UnitID, u.UnitNumber, u.Bedrooms, u.Bathrooms, o.RentAmount AS Rent,
-                b.BuildingID, b.Address, b.City, b.State, b.Latitude, b.Longitude
+                b.BuildingID, b.Address, b.City, b.State, b.Latitude, b.Longitude,
+				(SELECT TOP 1 ImageURL FROM Images i WHERE i.UnitID = u.UnitID AND i.FeaturedImage = 1) AS ImageURL
             FROM Units u
             INNER JOIN Buildings b ON u.BuildingID = b.BuildingID
             INNER JOIN Offers o ON u.UnitID = o.UnitID
