@@ -19,6 +19,8 @@ app.use(cookieParser());
 
 const allowedOrigins = ['http://localhost:3000','https://milo-homes.vercel.app/']; // Replace with your Vercel app domain
 
+app.options('*', cors());
+
 // Configure session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET, // Replace with a secure secret
@@ -37,14 +39,14 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Apply CORS middleware
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (e.g., mobile apps, Postman) or explicitly allowed origins
+        // Allow requests with no origin (like mobile apps) or explicitly allowed origins
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true, // Allow cookies and headers like Authorization
+    credentials: true, // Allow cookies and credentials
 }));
 
 app.use((req, res, next) => {
